@@ -609,18 +609,6 @@ def render_sidebar():
                 st.rerun()
 
         st.divider()
-
-        # API Key status
-        api_key = get_api_key()
-        provider = get_api_provider()
-
-        if api_key:
-            name = "Google Gemini" if provider == "gemini" else "OpenAI"
-            st.success(f"**API Key Active**\n\nProvider: {name}")
-        else:
-            st.warning("**No API Key Found**\n\nUse Demo Mode or set `GEMINI_API_KEY`.")
-
-        st.divider()
         st.markdown("**Supported Formats**")
         st.caption("MP3 · WAV · M4A · MP4 · AAC · FLAC · OGG")
 
