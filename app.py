@@ -1044,6 +1044,17 @@ SAMPLE_STUDY_MATERIAL = {
 
 def get_api_key():
     """Return the first available API key, or None."""
+    # Check st.secrets (Streamlit Cloud)
+    if hasattr(st, "secrets"):
+        try:
+            if "GEMINI_API_KEY" in st.secrets:
+                return st.secrets["GEMINI_API_KEY"]
+            if "AI_API_KEY" in st.secrets:
+                return st.secrets["AI_API_KEY"]
+            if "OPENAI_API_KEY" in st.secrets:
+                return st.secrets["OPENAI_API_KEY"]
+        except Exception:
+            pass
     return (
         os.getenv("GEMINI_API_KEY") or
         os.getenv("AI_API_KEY") or
@@ -1053,6 +1064,14 @@ def get_api_key():
 
 def get_api_provider():
     """Return the detected provider name."""
+    if hasattr(st, "secrets"):
+        try:
+            if "GEMINI_API_KEY" in st.secrets or "AI_API_KEY" in st.secrets:
+                return "gemini"
+            if "OPENAI_API_KEY" in st.secrets:
+                return "openai"
+        except Exception:
+            pass
     if os.getenv("GEMINI_API_KEY") or os.getenv("AI_API_KEY"):
         return "gemini"
     if os.getenv("OPENAI_API_KEY"):
