@@ -64,11 +64,20 @@ ACADEMIC_CSS = """
     --font-body:       'Source Sans 3', Georgia, serif;
 }
 
-/* ── Global Reset ── */
-html, body, [class*="css"] {
+/* ── Global Reset & Strict Background Enforcement ── */
+.stApp,
+.main,
+.block-container,
+[data-testid="stMainBlockContainer"],
+[data-testid="stAppViewContainer"],
+section.main {
+    background-color: #F8F9FA !important;
+}
+
+html, body {
     font-family: var(--font-body);
-    background-color: var(--bg) !important;
-    color: var(--text-body);
+    background-color: #F8F9FA !important;
+    color: #191C1D !important;
 }
 
 /* ── Strip ALL Streamlit top padding / toolbar ── */
@@ -113,7 +122,7 @@ section.main                       { padding-top: 0 !important; margin-top: 0 !i
     font-family: var(--font-head);
     font-size: 1.35rem;
     font-weight: 700;
-    color: var(--primary);
+    color: #1A2B3C !important;
     letter-spacing: -0.02em;
 }
 .app-logo-dot {
@@ -122,24 +131,7 @@ section.main                       { padding-top: 0 !important; margin-top: 0 !i
 .app-logo-subtitle {
     font-family: var(--font-body);
     font-size: 0.85rem;
-    color: var(--text-muted);
-}
-.app-nav {
-    display: flex;
-    gap: 1.75rem;
-    list-style: none;
-    margin: 0; padding: 0;
-}
-.app-nav a {
-    font-family: var(--font-head);
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--text-muted);
-    text-decoration: none;
-    letter-spacing: 0.01em;
-}
-.app-nav a:hover, .app-nav a.active {
-    color: var(--primary);
+    color: #44474C !important;
 }
 
 /* ── Hero Section ── */
@@ -151,7 +143,7 @@ section.main                       { padding-top: 0 !important; margin-top: 0 !i
     font-family: var(--font-head);
     font-size: 2.5rem;
     font-weight: 700;
-    color: var(--primary);
+    color: #1A2B3C !important;
     letter-spacing: -0.03em;
     line-height: 1.2;
     margin-bottom: 0.75rem;
@@ -159,7 +151,7 @@ section.main                       { padding-top: 0 !important; margin-top: 0 !i
 .hero p {
     font-family: var(--font-body);
     font-size: 1.125rem;
-    color: var(--text-muted);
+    color: #44474C !important;
     max-width: 560px;
     margin: 0 auto 0.5rem;
     line-height: 1.6;
@@ -577,18 +569,42 @@ DARK_CSS = """
     --shadow-hover:    0 4px 16px rgba(0,0,0,0.5);
 }
 
-html, body, [class*="css"] {
-    background-color: var(--bg) !important;
-    color: var(--text-body) !important;
+html, body {
+    background-color: #0D1B2A !important;
+    color: #CDD7E6 !important;
 }
 
-/* ── Streamlit main bg ── */
+/* ── Streamlit main bg in dark mode ── */
 .stApp,
 .main,
 .block-container,
 [data-testid="stMainBlockContainer"],
-[data-testid="stAppViewContainer"] {
-    background-color: var(--bg) !important;
+[data-testid="stAppViewContainer"],
+section.main {
+    background-color: #0D1B2A !important;
+}
+
+/* ── Hero text dark overrides ── */
+.hero h1 {
+    color: #E2EAF4 !important;
+}
+.hero p {
+    color: #8FA3BB !important;
+}
+
+/* ── Upload container dark overrides ── */
+.upload-container {
+    background: #162333 !important;
+    border: 2px dashed #253547 !important;
+}
+.upload-container:hover {
+    border-color: #5B9FE8 !important;
+}
+.upload-title {
+    color: #E2EAF4 !important;
+}
+.upload-subtitle {
+    color: #8FA3BB !important;
 }
 
 /* ── All Streamlit widget containers ── */
@@ -599,13 +615,13 @@ html, body, [class*="css"] {
     background-color: transparent !important;
 }
 
-/* ── Text: only target actual text containers, not every div ── */
+/* ── Text: only target actual text containers ── */
 .stMarkdown, .stMarkdown p, .stMarkdown li, .stMarkdown span,
 .stText, [data-testid="stText"] {
-    color: var(--text-body) !important;
+    color: #CDD7E6 !important;
 }
 label, .stRadio label, .stCheckbox label {
-    color: var(--text-body) !important;
+    color: #CDD7E6 !important;
 }
 
 /* ── Text inputs ── */
@@ -614,14 +630,14 @@ label, .stRadio label, .stCheckbox label {
 .stTextArea textarea,
 [data-baseweb="input"] input,
 [data-baseweb="textarea"] textarea {
-    background-color: var(--surface) !important;
-    color: var(--text-body) !important;
-    border-color: var(--border) !important;
+    background-color: #162333 !important;
+    color: #E2EAF4 !important;
+    border-color: #253547 !important;
 }
 [data-baseweb="input"],
 [data-baseweb="textarea"] {
-    background-color: var(--surface) !important;
-    border-color: var(--border) !important;
+    background-color: #162333 !important;
+    border-color: #253547 !important;
 }
 
 /* ── File uploader ── */
@@ -629,8 +645,8 @@ label, .stRadio label, .stCheckbox label {
 [data-testid="stFileUploaderDropzone"],
 [data-testid="stFileUploaderDropzone"] > div,
 .stFileUploader {
-    background-color: var(--surface) !important;
-    border-color: var(--border) !important;
+    background-color: #162333 !important;
+    border-color: #253547 !important;
 }
 [data-testid="stFileUploaderDropzone"] small,
 [data-testid="stFileUploaderDropzone"] span,
@@ -639,52 +655,52 @@ label, .stRadio label, .stCheckbox label {
 [data-testid="stFileUploader"] span,
 [data-testid="stFileUploader"] p,
 [data-testid="stFileUploader"] small {
-    color: var(--text-muted) !important;
+    color: #8FA3BB !important;
 }
 /* The inner upload button */
 [data-testid="stFileUploaderDropzone"] button {
-    background-color: var(--tag-bg) !important;
-    color: var(--accent-dark) !important;
-    border-color: var(--border) !important;
+    background-color: #1A2D42 !important;
+    color: #7DB6F0 !important;
+    border-color: #253547 !important;
 }
 
 /* ── Select boxes ── */
 [data-baseweb="select"] > div,
 [data-baseweb="popover"] > div {
-    background-color: var(--surface) !important;
-    color: var(--text-body) !important;
-    border-color: var(--border) !important;
+    background-color: #162333 !important;
+    color: #E2EAF4 !important;
+    border-color: #253547 !important;
 }
 
 /* ── Buttons ── */
 .stButton > button {
-    background-color: var(--surface) !important;
-    color: var(--text-body) !important;
-    border-color: var(--border) !important;
+    background-color: #162333 !important;
+    color: #E2EAF4 !important;
+    border-color: #253547 !important;
 }
 .stButton > button[kind="primary"],
 [data-testid="baseButton-primary"] {
-    background-color: var(--accent-dark) !important;
-    color: #FFFFFF !important;
+    background-color: #7DB6F0 !important;
+    color: #0D1B2A !important;
     border: none !important;
 }
 .stButton > button:hover {
-    border-color: var(--accent) !important;
-    color: var(--accent) !important;
+    border-color: #5B9FE8 !important;
+    color: #5B9FE8 !important;
 }
 
 /* ── Download buttons ── */
 .stDownloadButton > button {
-    background-color: var(--surface) !important;
-    color: var(--text-body) !important;
-    border-color: var(--border) !important;
+    background-color: #162333 !important;
+    color: #E2EAF4 !important;
+    border-color: #253547 !important;
 }
 
 /* ── Radio buttons ── */
 [data-testid="stRadio"] label,
 [data-testid="stRadio"] label p,
 [data-testid="stRadio"] div[data-testid="stMarkdownContainer"] p {
-    color: var(--primary) !important;
+    color: #E2EAF4 !important;
     font-size: 0.95rem !important;
 }
 [data-testid="stRadio"] > div {
@@ -693,122 +709,146 @@ label, .stRadio label, .stCheckbox label {
 
 /* ── Tabs ── */
 .stTabs [data-baseweb="tab-list"] {
-    background-color: var(--bg) !important;
-    border-bottom-color: var(--border) !important;
+    background-color: #0D1B2A !important;
+    border-bottom-color: #253547 !important;
 }
 .stTabs [data-baseweb="tab"] {
     background-color: transparent !important;
-    color: var(--text-muted) !important;
+    color: #8FA3BB !important;
 }
 .stTabs [aria-selected="true"] {
-    color: var(--primary) !important;
-    border-bottom-color: var(--accent) !important;
+    color: #E2EAF4 !important;
+    border-bottom-color: #5B9FE8 !important;
 }
 .stTabs [data-baseweb="tab-panel"] {
-    background-color: var(--bg) !important;
+    background-color: #0D1B2A !important;
 }
 
 /* ── Progress bar ── */
 [data-testid="stProgressBar"] > div > div {
-    background-color: var(--accent) !important;
+    background-color: #5B9FE8 !important;
 }
 [data-testid="stProgressBar"] > div {
-    background-color: var(--border) !important;
+    background-color: #253547 !important;
 }
 
 /* ── Alerts / status boxes ── */
 [data-testid="stAlert"] {
-    background-color: var(--surface) !important;
-    border-color: var(--border) !important;
-    color: var(--text-body) !important;
+    background-color: #162333 !important;
+    border-color: #253547 !important;
+    color: #CDD7E6 !important;
 }
 
 /* ── Expander ── */
 .streamlit-expanderHeader {
-    background-color: var(--surface) !important;
-    color: var(--primary) !important;
-    border-color: var(--border) !important;
+    background-color: #162333 !important;
+    color: #E2EAF4 !important;
+    border-color: #253547 !important;
 }
 .streamlit-expanderContent {
-    background-color: var(--surface) !important;
-    border-color: var(--border) !important;
+    background-color: #162333 !important;
+    border-color: #253547 !important;
 }
 
 /* ── Status widget ── */
 [data-testid="stStatus"] {
-    background-color: var(--surface) !important;
-    border-color: var(--border) !important;
-    color: var(--text-body) !important;
+    background-color: #162333 !important;
+    border-color: #253547 !important;
+    color: #CDD7E6 !important;
 }
 [data-testid="stStatus"] p, [data-testid="stStatus"] span {
-    color: var(--text-body) !important;
+    color: #CDD7E6 !important;
 }
 
 /* ── st.code blocks ── */
 .stCode, [data-testid="stCodeBlock"] {
     background-color: #0A1420 !important;
-    border-color: var(--border) !important;
+    border-color: #253547 !important;
 }
 .stCode code, [data-testid="stCodeBlock"] code {
     color: #A8C8F0 !important;
 }
 
-/* ── Sidebar (always dark regardless) ── */
+/* ── Sidebar ── */
 section[data-testid="stSidebar"] {
     background: #0A1520 !important;
 }
 
 /* ── Custom HTML component dark overrides ── */
 .card {
-    background: var(--surface) !important;
-    border-color: var(--border) !important;
+    background: #162333 !important;
+    border: 1px solid #253547 !important;
+}
+.card-title {
+    color: #E2EAF4 !important;
+}
+.card-text {
+    color: #CDD7E6 !important;
 }
 .def-card {
-    background: var(--surface) !important;
-    border-top-color: var(--border) !important;
-    border-right-color: var(--border) !important;
-    border-bottom-color: var(--border) !important;
+    background: #162333 !important;
+    border-left: 3px solid #5B9FE8 !important;
+    border-top: 1px solid #253547 !important;
+    border-right: 1px solid #253547 !important;
+    border-bottom: 1px solid #253547 !important;
+}
+.def-term {
+    color: #E2EAF4 !important;
+}
+.def-meaning {
+    color: #CDD7E6 !important;
 }
 .key-point-item {
-    background: var(--surface) !important;
-    border-color: var(--border) !important;
+    background: #162333 !important;
+    border: 1px solid #253547 !important;
+}
+.key-point-num {
+    color: #5B9FE8 !important;
+}
+.key-point-text {
+    color: #CDD7E6 !important;
 }
 .flashcard {
-    background: var(--surface) !important;
-    border-color: var(--border) !important;
+    background: #162333 !important;
+    border: 1px solid #253547 !important;
+}
+.flashcard-content {
+    color: #E2EAF4 !important;
 }
 .quiz-question {
-    background: var(--surface) !important;
-    border-color: var(--border) !important;
+    background: #162333 !important;
+    border: 1px solid #253547 !important;
+}
+.quiz-question-text {
+    color: #E2EAF4 !important;
 }
 .quiz-score-box {
-    background: var(--surface) !important;
-    border-color: var(--border) !important;
+    background: #162333 !important;
+    border: 1px solid #253547 !important;
+}
+.quiz-score-big {
+    color: #E2EAF4 !important;
 }
 .transcript-body {
-    background: var(--surface) !important;
-    border-color: var(--border) !important;
-    color: var(--text-body) !important;
-}
-.upload-container {
-    background: var(--surface) !important;
-    border-color: var(--border) !important;
+    background: #162333 !important;
+    border: 1px solid #253547 !important;
+    color: #CDD7E6 !important;
 }
 .format-tag {
-    background: var(--tag-bg) !important;
-    color: var(--accent-dark) !important;
+    background: #1A2D42 !important;
+    color: #7DB6F0 !important;
 }
 .section-badge {
-    background: var(--tag-bg) !important;
-    color: var(--accent-dark) !important;
+    background: #1A2D42 !important;
+    color: #7DB6F0 !important;
 }
 .flashcard-front-label {
-    background: var(--tag-bg) !important;
-    color: var(--accent-dark) !important;
+    background: #1A2D42 !important;
+    color: #7DB6F0 !important;
 }
 .flashcard-back-label {
     background: #0F2A1A !important;
-    color: var(--success) !important;
+    color: #4CAF74 !important;
 }
 </style>
 """
@@ -1506,24 +1546,30 @@ def render_header():
     toggle_icon  = "☀️" if dark_mode else "🌙"
     toggle_label = "Light" if dark_mode else "Dark"
 
+    logo_col = "#E2EAF4" if dark_mode else "#1A2B3C"
+    sub_col  = "#8FA3BB" if dark_mode else "#44474C"
+    nav_act  = "#E2EAF4" if dark_mode else "#1A2B3C"
+    nav_mut  = "#8FA3BB" if dark_mode else "#74777D"
+    bdr_col  = "#253547" if dark_mode else "#E1E4E8"
+
     col_logo, col_toggle = st.columns([5, 1])
 
     with col_logo:
         # Logo + inline nav links all in one HTML row (no stacking on mobile)
         st.markdown(f"""
-        <div style="padding: 1rem 0 0.6rem; border-bottom: 1px solid var(--border);
+        <div style="padding: 1rem 0 0.6rem; border-bottom: 1px solid {bdr_col};
                     display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;">
             <div style="display:flex; align-items:baseline; gap:0.5rem; flex-shrink:0;">
                 <span style="font-family:var(--font-head);font-size:1.3rem;font-weight:700;
-                             color:var(--primary);letter-spacing:-0.02em;white-space:nowrap;"
+                             color:{logo_col};letter-spacing:-0.02em;white-space:nowrap;"
                 >LectureNote<span style='color:var(--accent);'> AI</span></span>
-                <span style="font-family:var(--font-body);font-size:0.8rem;color:var(--text-muted);white-space:nowrap;"
+                <span style="font-family:var(--font-body);font-size:0.8rem;color:{sub_col};white-space:nowrap;"
                 >&nbsp;&middot;&nbsp; Your lecture. Organized for learning.</span>
             </div>
             <nav style="display:flex; align-items:center; gap:1.5rem; flex-wrap:nowrap;">
-                <span style="font-family:var(--font-head);font-size:0.85rem;font-weight:600;color:var(--primary);">Home</span>
-                <span style="font-family:var(--font-head);font-size:0.85rem;font-weight:500;color:var(--text-muted);">My Lectures</span>
-                <span style="font-family:var(--font-head);font-size:0.85rem;font-weight:500;color:var(--text-muted);">About</span>
+                <span style="font-family:var(--font-head);font-size:0.85rem;font-weight:600;color:{nav_act};">Home</span>
+                <span style="font-family:var(--font-head);font-size:0.85rem;font-weight:500;color:{nav_mut};">My Lectures</span>
+                <span style="font-family:var(--font-head);font-size:0.85rem;font-weight:500;color:{nav_mut};">About</span>
             </nav>
         </div>
         """, unsafe_allow_html=True)
