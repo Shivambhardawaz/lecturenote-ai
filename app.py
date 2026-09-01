@@ -592,17 +592,21 @@ def render_sidebar():
         st.divider()
 
         # Navigation
-        nav = st.radio(
-            "Navigation",
-            options=["🏠 Home", "ℹ️ About"],
-            label_visibility="collapsed"
-        )
-        if nav == "🏠 Home" and st.session_state.current_page != "home":
-            st.session_state.current_page = "home"
-            st.rerun()
-        elif nav == "ℹ️ About" and st.session_state.current_page != "about":
-            st.session_state.current_page = "about"
-            st.rerun()
+        if st.button("🏠 Home", use_container_width=True, key="side_nav_home"):
+            if st.session_state.current_page != "home":
+                st.session_state.current_page = "home"
+                st.rerun()
+
+        if st.session_state.get("processing_done", False):
+            if st.button("📖 Current Study Material", use_container_width=True, key="side_nav_results"):
+                if st.session_state.current_page != "results":
+                    st.session_state.current_page = "results"
+                    st.rerun()
+
+        if st.button("ℹ️ About", use_container_width=True, key="side_nav_about"):
+            if st.session_state.current_page != "about":
+                st.session_state.current_page = "about"
+                st.rerun()
 
         st.divider()
 
@@ -661,20 +665,16 @@ def render_home():
     # ── Handle Sample Demo ──
     if btn_sample:
         reset_results()
-        with st.status("Loading sample lecture...", expanded=True) as status:
-            st.write("Loading pre-processed lecture data...")
-            time.sleep(0.3)
-            st.session_state.transcript = SAMPLE_TRANSCRIPT
-            st.session_state.summary = SAMPLE_STUDY_MATERIAL["summary"]
-            st.session_state.key_points = SAMPLE_STUDY_MATERIAL["key_points"]
-            st.session_state.definitions = SAMPLE_STUDY_MATERIAL["definitions"]
-            st.session_state.quiz = SAMPLE_STUDY_MATERIAL["quiz"]
-            st.session_state.flashcards = SAMPLE_STUDY_MATERIAL["flashcards"]
-            st.session_state.lecture_topic = "Introduction to Machine Learning"
-            st.session_state.processing_done = True
-            st.session_state.using_sample = True
-            st.session_state.current_page = "results"
-            status.update(label="Sample lecture ready!", state="complete")
+        st.session_state.transcript = SAMPLE_TRANSCRIPT
+        st.session_state.summary = SAMPLE_STUDY_MATERIAL["summary"]
+        st.session_state.key_points = SAMPLE_STUDY_MATERIAL["key_points"]
+        st.session_state.definitions = SAMPLE_STUDY_MATERIAL["definitions"]
+        st.session_state.quiz = SAMPLE_STUDY_MATERIAL["quiz"]
+        st.session_state.flashcards = SAMPLE_STUDY_MATERIAL["flashcards"]
+        st.session_state.lecture_topic = "Introduction to Machine Learning"
+        st.session_state.processing_done = True
+        st.session_state.using_sample = True
+        st.session_state.current_page = "results"
         st.rerun()
 
     # ── Handle Real Upload ──
