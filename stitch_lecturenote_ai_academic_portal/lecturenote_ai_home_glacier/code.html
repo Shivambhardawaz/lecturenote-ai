@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LectureNote AI - Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Source+Sans+3:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "glacier": "#7dd3fc",
+          "glacier-dark": "#38bdf8",
+          "surface-glass": "rgba(255, 255, 255, 0.05)",
+          "surface-glass-hover": "rgba(255, 255, 255, 0.1)",
+          "border-glass": "rgba(255, 255, 255, 0.1)",
+          "on-tertiary-fixed-variant": "#3f484f",
+          "on-error-container": "#93000a",
+          "surface-container-high": "#e7e8e9",
+          "on-error": "#ffffff",
+          "surface-dim": "#d9dadb",
+          "secondary": "#0060ac",
+          "on-secondary": "#ffffff",
+          "tertiary-fixed": "#dbe4ed",
+          "secondary-fixed-dim": "#a4c9ff",
+          "surface-container-lowest": "#ffffff",
+          "primary-fixed": "#d2e4fb",
+          "outline-variant": "#c4c6cd",
+          "surface-container": "#edeeef",
+          "tertiary-container": "#222b32",
+          "on-tertiary-container": "#89929b",
+          "primary": "#041627",
+          "on-primary-fixed-variant": "#38485a",
+          "surface-variant": "#e1e3e4",
+          "surface-container-low": "#f3f4f5",
+          "on-surface": "#191c1d",
+          "surface-container-highest": "#e1e3e4",
+          "on-tertiary-fixed": "#141d23",
+          "primary-container": "#1a2b3c",
+          "secondary-container": "#68abff",
+          "on-surface-variant": "#44474c",
+          "inverse-primary": "#b7c8de",
+          "on-primary-container": "#8192a7",
+          "on-secondary-container": "#003e73",
+          "on-background": "#191c1d",
+          "error-container": "#ffdad6",
+          "outline": "#74777d",
+          "on-primary-fixed": "#0b1d2d",
+          "inverse-on-surface": "#f0f1f2",
+          "background": "#0b1121",
+          "surface": "#f8f9fa",
+          "surface-bright": "#f8f9fa",
+          "primary-fixed-dim": "#b7c8de",
+          "secondary-fixed": "#d4e3ff",
+          "inverse-surface": "#2e3132",
+          "on-primary": "#ffffff",
+          "tertiary": "#0e171d",
+          "on-secondary-fixed": "#001c39",
+          "error": "#ba1a1a",
+          "on-tertiary": "#ffffff",
+          "tertiary-fixed-dim": "#bfc8d0",
+          "surface-tint": "#4f6073",
+          "on-secondary-fixed-variant": "#004883"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.25rem",
+          "lg": "0.75rem",
+          "xl": "1rem",
+          "2xl": "1.25rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "container-max-width": "1200px",
+          "margin-mobile": "16px",
+          "gutter": "24px",
+          "unit": "8px",
+          "margin-desktop": "40px"
+        },
+        "fontFamily": {
+          "h2": ["Inter"],
+          "body-md": ["\"Source Sans 3\""],
+          "caption": ["\"Source Sans 3\""],
+          "body-lg": ["\"Source Sans 3\""],
+          "label-sm": ["Inter"],
+          "h1-desktop": ["Inter"],
+          "h1-mobile": ["Inter"],
+          "h3": ["Inter"]
+        },
+        "fontSize": {
+          "h2": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+          "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+          "caption": ["13px", { "lineHeight": "1.4", "fontWeight": "400" }],
+          "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+          "label-sm": ["14px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "500" }],
+          "h1-desktop": ["40px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+          "h1-mobile": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+          "h3": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }]
+        }
+      }
+    }
+  }
+</script>
+<style>
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .glass-glow {
+    box-shadow: 0 0 40px rgba(125, 211, 252, 0.05);
+  }
+</style>
+</head>
+<body class="bg-background text-slate-200 font-body-md min-h-screen flex flex-col relative overflow-x-hidden">
+<!-- Ambient Glow Backgrounds -->
+<div class="fixed top-[-20%] left-[-10%] w-[50%] h-[50%] bg-glacier/10 blur-[150px] rounded-full pointer-events-none z-0"></div>
+<div class="fixed bottom-[-20%] right-[-10%] w-[40%] h-[40%] bg-glacier-dark/10 blur-[150px] rounded-full pointer-events-none z-0"></div>
+<!-- TopNavBar -->
+<header class="glass-panel border-b border-border-glass sticky top-0 z-50">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 max-w-container-max-width mx-auto">
+<!-- Brand -->
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-glacier" data-icon="school" style="font-variation-settings: 'FILL' 1;">school</span>
+<span class="font-h2 text-h2 font-bold text-white tracking-tight">LectureNote AI</span>
+</div>
+<!-- Navigation Links (Desktop) -->
+<nav class="hidden md:flex gap-gutter items-center">
+<a class="text-glacier border-b-2 border-glacier pb-1 font-body-md text-body-md transition-colors hover:text-white" href="#">Home</a>
+<a class="text-slate-400 font-body-md text-body-md transition-colors hover:text-white" href="#">My Lectures</a>
+<a class="text-slate-400 font-body-md text-body-md transition-colors hover:text-white" href="#">About</a>
+</nav>
+<!-- Actions -->
+<div class="flex items-center gap-4">
+<button class="hidden md:block font-label-sm text-label-sm text-slate-300 border border-border-glass px-4 py-2 rounded-lg transition-all hover:bg-surface-glass hover:text-white">Sign In</button>
+<button class="font-label-sm text-label-sm bg-glacier text-[#0b1121] font-semibold px-5 py-2 rounded-lg transition-all hover:bg-glacier-dark hover:shadow-[0_0_15px_rgba(125,211,252,0.4)]">Get Started</button>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow flex flex-col items-center px-margin-mobile md:px-margin-desktop py-12 md:py-24 max-w-container-max-width mx-auto w-full relative z-10">
+<!-- Hero Section -->
+<div class="text-center max-w-3xl mb-12">
+<h1 class="font-h1-mobile text-h1-mobile md:font-h1-desktop md:text-h1-desktop text-white mb-6">Turn lectures into <span class="text-transparent bg-clip-text bg-gradient-to-r from-glacier to-white">clear study material.</span></h1>
+<p class="font-body-lg text-body-lg text-slate-400">Upload a lecture recording and transform it into organized notes, quizzes, and flashcards.</p>
+</div>
+<!-- Upload Card -->
+<div class="w-full max-w-2xl glass-panel glass-glow rounded-2xl p-8 md:p-12 text-center transition-all">
+<div class="mb-6 flex justify-center">
+<div class="bg-glacier/10 border border-glacier/20 rounded-full p-4">
+<span class="material-symbols-outlined text-4xl text-glacier" data-icon="cloud_upload" style="font-variation-settings: 'FILL' 1;">cloud_upload</span>
+</div>
+</div>
+<h2 class="font-h2 text-h2 text-white mb-2">Upload your lecture</h2>
+<p class="font-body-md text-body-md text-slate-400 mb-8">Drag and drop your audio or video file here</p>
+<div class="border-2 border-dashed border-border-glass rounded-xl p-8 mb-8 bg-black/20 flex flex-col items-center justify-center min-h-[220px] transition-all hover:border-glacier/50 hover:bg-black/30">
+<button class="bg-surface-glass border border-border-glass text-white font-label-sm text-label-sm px-6 py-3 rounded-lg mb-4 transition-all hover:bg-surface-glass-hover flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="upload_file">upload_file</span>
+                    Choose Lecture File
+                </button>
+<p class="font-caption text-caption text-slate-500">Supported formats: MP3, WAV, M4A, MP4 (Max 500MB)</p>
+<div class="mt-4">
+<span class="font-body-md text-body-md text-slate-500 mx-2">or</span>
+<button class="text-glacier font-label-sm text-label-sm hover:text-glacier-dark transition-colors hover:underline">Browse Files</button>
+</div>
+</div>
+<!-- Metadata Form -->
+<div class="text-left mt-8 pt-8 border-t border-border-glass">
+<label class="block font-label-sm text-label-sm text-slate-300 mb-2" for="lecture-topic">Lecture Topic (Optional)</label>
+<input class="w-full bg-black/20 border border-border-glass rounded-lg px-4 py-3 font-body-md text-body-md text-white placeholder-slate-600 focus:outline-none focus:border-glacier focus:ring-1 focus:ring-glacier transition-all mb-6" id="lecture-topic" placeholder="e.g. Introduction to Machine Learning" type="text"/>
+<button class="w-full bg-glacier text-[#0b1121] font-semibold font-label-sm text-label-sm px-6 py-4 rounded-lg transition-all hover:bg-glacier-dark flex items-center justify-center gap-2 hover:shadow-[0_0_20px_rgba(125,211,252,0.3)]">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+                    Generate Study Material
+                </button>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="glass-panel border-t border-border-glass mt-auto relative z-10 bg-black/20">
+<div class="w-full py-10 px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-gutter max-w-container-max-width mx-auto">
+<!-- Footer Brand -->
+<div class="flex items-center gap-2 mb-6 md:mb-0">
+<span class="material-symbols-outlined text-slate-400" data-icon="school">school</span>
+<span class="font-h3 text-h3 font-semibold text-slate-300 tracking-tight">LectureNote AI</span>
+</div>
+<!-- Copyright -->
+<p class="font-caption text-caption text-slate-500 text-center md:text-left order-3 md:order-2">
+                © 2024 LectureNote AI. Academic Excellence through Technology.
+            </p>
+<!-- Links -->
+<div class="flex flex-wrap justify-center gap-6 font-caption text-caption order-2 md:order-3">
+<a class="text-slate-400 hover:text-glacier transition-colors" href="#">Privacy Policy</a>
+<a class="text-slate-400 hover:text-glacier transition-colors" href="#">Terms of Service</a>
+<a class="text-slate-400 hover:text-glacier transition-colors" href="#">Contact Support</a>
+<a class="text-slate-400 hover:text-glacier transition-colors" href="#">Institutional Access</a>
+</div>
+</div>
+</footer>
+</body></html>

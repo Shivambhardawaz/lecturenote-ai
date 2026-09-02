@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LectureNote AI - Results Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Source+Sans+3:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#b7c8de",
+                        "surface-container": "#edeeef",
+                        "on-background": "#e2e2e9",
+                        "on-primary-fixed": "#0b1d2d",
+                        "inverse-surface": "#2e3132",
+                        "background": "#111118",
+                        "secondary": "#7dd3fc",
+                        "on-error": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-surface-variant": "#c4c6d0",
+                        "on-tertiary-fixed-variant": "#3f484f",
+                        "on-primary": "#003351",
+                        "tertiary": "#a8c8ff",
+                        "surface-container-highest": "#333336",
+                        "error": "#ffb4ab",
+                        "on-surface": "#e2e2e9",
+                        "surface-container-high": "#2b2b2e",
+                        "inverse-primary": "#b7c8de",
+                        "on-primary-fixed-variant": "#38485a",
+                        "on-secondary-container": "#cce5ff",
+                        "surface-dim": "#111118",
+                        "on-secondary-fixed-variant": "#004883",
+                        "primary": "#7dd3fc",
+                        "tertiary-fixed": "#dbe4ed",
+                        "surface-tint": "#7dd3fc",
+                        "surface-variant": "#44474e",
+                        "secondary-fixed-dim": "#a4c9ff",
+                        "surface": "#111118",
+                        "secondary-fixed": "#d4e3ff",
+                        "error-container": "#93000a",
+                        "primary-fixed": "#d2e4fb",
+                        "outline": "#8e9099",
+                        "outline-variant": "#44474e",
+                        "on-tertiary-fixed": "#141d23",
+                        "on-tertiary": "#003062",
+                        "on-primary-container": "#cce5ff",
+                        "surface-container-low": "#1c1c1f",
+                        "on-tertiary-container": "#d6e3ff",
+                        "on-secondary": "#003351",
+                        "tertiary-fixed-dim": "#bfc8d0",
+                        "tertiary-container": "#004786",
+                        "inverse-on-surface": "#111118",
+                        "surface-container-lowest": "#0c0c0e",
+                        "on-secondary-fixed": "#001c39",
+                        "secondary-container": "#004a77",
+                        "surface-bright": "#37373a",
+                        "primary-container": "#004a77"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "12px",
+                        "lg": "12px",
+                        "xl": "16px",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "container-max-width": "1200px",
+                        "unit": "8px",
+                        "margin-desktop": "40px"
+                    },
+                    "fontFamily": {
+                        "h1-desktop": ["Inter"],
+                        "h3": ["Inter"],
+                        "h1-mobile": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "h2": ["Inter"],
+                        "caption": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "h1-desktop": ["40px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "h3": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "h1-mobile": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "label-sm": ["14px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "h2": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "caption": ["13px", { "lineHeight": "1.4", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { 
+            background: linear-gradient(135deg, #0c0f12 0%, #1a1f26 100%);
+            background-attachment: fixed;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.2);
+        }
+        .glass-panel-highlight {
+            background: rgba(125, 211, 252, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(125, 211, 252, 0.15);
+            box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.2), 0 0 20px rgba(125, 211, 252, 0.05) inset;
+        }
+    </style>
+</head>
+<body class="text-on-background font-body-md min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="glass-panel w-full docked top-0 z-50 sticky border-b border-white/10">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 max-w-container-max-width mx-auto">
+<div class="flex items-center gap-gutter">
+<a class="font-h2 text-h2 font-bold text-white flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-primary" data-icon="school" data-weight="fill" style="font-variation-settings: 'FILL' 1;">school</span>
+                    LectureNote AI
+                </a>
+</div>
+<div class="hidden md:flex items-center gap-gutter">
+<a class="font-h3 text-h3 text-on-surface-variant hover:text-white hover:bg-white/5 transition-colors px-3 py-2 rounded-lg" href="#">Home</a>
+<a class="font-h3 text-h3 text-white border-b-2 border-primary pb-1 hover:bg-white/5 transition-colors px-3 py-2 rounded-t-lg" href="#">My Lectures</a>
+<a class="font-h3 text-h3 text-on-surface-variant hover:text-white hover:bg-white/5 transition-colors px-3 py-2 rounded-lg" href="#">About</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="hidden md:block font-label-sm text-label-sm text-white hover:bg-white/5 px-4 py-2 rounded-lg transition-colors border border-transparent hover:border-white/10">Sign In</button>
+<button class="font-label-sm text-label-sm bg-primary text-on-primary hover:bg-white hover:text-primary transition-colors px-4 py-2 rounded-lg shadow-[0_0_15px_rgba(125,211,252,0.3)]">Get Started</button>
+<button class="md:hidden text-white">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow w-full max-w-container-max-width mx-auto px-margin-mobile md:px-margin-desktop py-8 md:py-12">
+<!-- Header Section -->
+<header class="mb-8 flex flex-col md:flex-row md:justify-between md:items-end gap-6">
+<div>
+<h1 class="font-h1-mobile text-h1-mobile md:font-h1-desktop md:text-h1-desktop text-white mb-2">Your Study Material</h1>
+<div class="flex flex-wrap gap-4 text-on-surface-variant font-caption text-caption">
+<div class="flex items-center gap-1 bg-white/5 border border-white/10 text-white px-3 py-1 rounded-full backdrop-blur-sm">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="movie">movie</span>
+                        Lecture: Introduction to Machine Learning
+                    </div>
+<div class="flex items-center gap-1 bg-white/5 border border-white/10 text-white px-3 py-1 rounded-full backdrop-blur-sm">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="schedule">schedule</span>
+                        Generated from: 48 min lecture
+                    </div>
+</div>
+</div>
+<button class="flex items-center gap-2 bg-primary/10 border border-primary/30 text-primary font-label-sm text-label-sm px-6 py-3 rounded-lg hover:bg-primary/20 hover:border-primary/50 transition-colors self-start md:self-auto backdrop-blur-md">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+                Download All
+            </button>
+</header>
+<!-- Tabs Navigation -->
+<div class="border-b border-white/10 mb-8 overflow-x-auto">
+<ul class="flex gap-8 min-w-max">
+<li>
+<a class="block py-4 font-label-sm text-label-sm text-on-surface-variant hover:text-white transition-colors" href="#">Transcript</a>
+</li>
+<li>
+<a class="block py-4 font-label-sm text-label-sm text-white border-b-2 border-primary" href="#">Study Notes</a>
+</li>
+<li>
+<a class="block py-4 font-label-sm text-label-sm text-on-surface-variant hover:text-white transition-colors" href="#">Key Points</a>
+</li>
+<li>
+<a class="block py-4 font-label-sm text-label-sm text-on-surface-variant hover:text-white transition-colors" href="#">Definitions</a>
+</li>
+<li>
+<a class="block py-4 font-label-sm text-label-sm text-on-surface-variant hover:text-white transition-colors" href="#">Quiz</a>
+</li>
+<li>
+<a class="block py-4 font-label-sm text-label-sm text-on-surface-variant hover:text-white transition-colors" href="#">Flashcards</a>
+</li>
+</ul>
+</div>
+<!-- Bento Grid Layout for Notes -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Left Column (Overview & Important) -->
+<div class="md:col-span-4 flex flex-col gap-gutter">
+<!-- Lecture Overview -->
+<div class="glass-panel rounded-xl p-6">
+<h2 class="font-h3 text-h3 text-white flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary" data-icon="summarize">summarize</span>
+                        Lecture Overview
+                    </h2>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                        This lecture introduces the foundational concepts of Machine Learning, distinguishing it from traditional programming. It covers the core paradigms: supervised, unsupervised, and reinforcement learning, providing real-world examples for each to illustrate their practical applications in modern technology.
+                    </p>
+</div>
+<!-- Important Takeaways Box -->
+<div class="glass-panel-highlight rounded-xl p-6">
+<h2 class="font-h3 text-h3 text-primary flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined" data-icon="lightbulb" data-weight="fill" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+                        Important Takeaways
+                    </h2>
+<ul class="space-y-4 font-body-md text-body-md text-white/90">
+<li class="flex items-start gap-3">
+<div class="bg-primary/20 rounded-full p-0.5 mt-0.5 shrink-0">
+<span class="material-symbols-outlined text-primary text-[18px]" data-icon="check">check</span>
+</div>
+<span>Machine learning focuses on creating systems that learn from data rather than explicit programming.</span>
+</li>
+<li class="flex items-start gap-3">
+<div class="bg-primary/20 rounded-full p-0.5 mt-0.5 shrink-0">
+<span class="material-symbols-outlined text-primary text-[18px]" data-icon="check">check</span>
+</div>
+<span>The quality and quantity of data are critical to the success of any ML model.</span>
+</li>
+<li class="flex items-start gap-3">
+<div class="bg-primary/20 rounded-full p-0.5 mt-0.5 shrink-0">
+<span class="material-symbols-outlined text-primary text-[18px]" data-icon="check">check</span>
+</div>
+<span>Overfitting occurs when a model learns the training data too well, failing to generalize to new data.</span>
+</li>
+</ul>
+</div>
+</div>
+<!-- Right Column (Main Concepts & Detailed Notes) -->
+<div class="md:col-span-8 flex flex-col gap-gutter">
+<!-- Main Concepts -->
+<div class="glass-panel rounded-xl p-6">
+<h2 class="font-h3 text-h3 text-white flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary" data-icon="category">category</span>
+                        Main Concepts
+                    </h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="p-5 bg-white/5 rounded-lg border border-white/10 hover:border-white/20 hover:bg-white/10 transition-colors">
+<h3 class="font-label-sm text-label-sm font-bold text-white mb-2 flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-primary inline-block"></span>
+                                Supervised Learning
+                            </h3>
+<p class="font-caption text-caption text-on-surface-variant">Training models using labeled datasets where the desired output is known. E.g., predicting house prices.</p>
+</div>
+<div class="p-5 bg-white/5 rounded-lg border border-white/10 hover:border-white/20 hover:bg-white/10 transition-colors">
+<h3 class="font-label-sm text-label-sm font-bold text-white mb-2 flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-primary inline-block"></span>
+                                Unsupervised Learning
+                            </h3>
+<p class="font-caption text-caption text-on-surface-variant">Finding patterns in unlabeled data. Grouping similar items without prior knowledge. E.g., customer segmentation.</p>
+</div>
+<div class="p-5 bg-white/5 rounded-lg border border-white/10 hover:border-white/20 hover:bg-white/10 transition-colors">
+<h3 class="font-label-sm text-label-sm font-bold text-white mb-2 flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-primary inline-block"></span>
+                                Reinforcement Learning
+                            </h3>
+<p class="font-caption text-caption text-on-surface-variant">Agents learn to make decisions by performing actions in an environment to maximize a reward. E.g., game playing AI.</p>
+</div>
+<div class="p-5 bg-white/5 rounded-lg border border-white/10 hover:border-white/20 hover:bg-white/10 transition-colors">
+<h3 class="font-label-sm text-label-sm font-bold text-white mb-2 flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-primary inline-block"></span>
+                                Features &amp; Labels
+                            </h3>
+<p class="font-caption text-caption text-on-surface-variant">Features are independent variables (inputs), labels are dependent variables (outputs we want to predict).</p>
+</div>
+</div>
+</div>
+<!-- Detailed Notes -->
+<div class="glass-panel rounded-xl p-6 md:p-8 flex-grow">
+<div class="flex justify-between items-center mb-6 border-b border-white/10 pb-4">
+<h2 class="font-h3 text-h3 text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="format_list_bulleted">format_list_bulleted</span>
+                            Detailed Notes
+                        </h2>
+<button class="text-on-surface-variant hover:text-white bg-white/5 hover:bg-white/10 p-2 rounded-lg border border-white/10 transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="content_copy">content_copy</span>
+</button>
+</div>
+<div class="prose prose-invert max-w-none font-body-md text-body-md text-on-surface-variant">
+<h3 class="text-white font-semibold mb-3 mt-6 first:mt-0 text-[18px]">1. Traditional Programming vs. Machine Learning</h3>
+<ul class="list-disc pl-5 mb-6 space-y-2 marker:text-primary">
+<li><strong class="text-white/90">Traditional:</strong> Data + Rules = Answers. A human writes explicit rules (code) to process data.</li>
+<li><strong class="text-white/90">Machine Learning:</strong> Data + Answers = Rules. The system learns the rules by analyzing examples of data and the expected answers.</li>
+</ul>
+<h3 class="text-white font-semibold mb-3 mt-6 text-[18px]">2. The Machine Learning Pipeline</h3>
+<ul class="list-disc pl-5 mb-6 space-y-2 marker:text-primary">
+<li><strong class="text-white/90">Data Collection:</strong> Gathering raw data from various sources.</li>
+<li><strong class="text-white/90">Data Preparation (Crucial step):</strong> Cleaning data, handling missing values, and formatting. "Garbage in, garbage out."</li>
+<li><strong class="text-white/90">Model Selection:</strong> Choosing the right algorithm (e.g., Linear Regression, Decision Tree) based on the problem type.</li>
+<li><strong class="text-white/90">Training:</strong> Feeding data to the model so it can adjust its internal parameters to minimize error.</li>
+<li><strong class="text-white/90">Evaluation:</strong> Testing the model on unseen data to assess its generalization capability.</li>
+</ul>
+<h3 class="text-white font-semibold mb-3 mt-6 text-[18px]">3. Key Challenges</h3>
+<ul class="list-disc pl-5 space-y-2 marker:text-primary">
+<li><strong class="text-white/90">Overfitting:</strong> Model memorizes training data; performs poorly on new data. (Analogy: Memorizing a math textbook but failing the exam because questions are slightly different).</li>
+<li><strong class="text-white/90">Underfitting:</strong> Model is too simple to capture underlying patterns in the data.</li>
+<li><strong class="text-white/90">Data Bias:</strong> If training data is biased, the resulting model will inherit and amplify those biases.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="glass-panel w-full border-t border-white/10 mt-auto rounded-t-2xl">
+<div class="w-full py-12 px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-gutter max-w-container-max-width mx-auto">
+<div class="font-h3 text-h3 font-semibold text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="school" data-weight="fill" style="font-variation-settings: 'FILL' 1;">school</span>
+                LectureNote AI
+            </div>
+<div class="flex flex-wrap justify-center gap-6 font-caption text-caption">
+<a class="text-on-surface-variant hover:text-white transition-colors" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-white transition-colors" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-white transition-colors" href="#">Contact Support</a>
+<a class="text-on-surface-variant hover:text-white transition-colors" href="#">Institutional Access</a>
+</div>
+<div class="font-caption text-caption text-on-surface-variant">
+                © 2024 LectureNote AI. Academic Excellence through Technology.
+            </div>
+</div>
+</footer>
+</body></html>
